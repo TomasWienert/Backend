@@ -14,7 +14,7 @@ export default class ProductManager {
             
             if (fs.existsSync(path)) {
                 const data = await fs.promises.readFile(path, "utf-8");
-                console.log(data);
+                //console.log(data);
                 const products = JSON.parse(data);
                 return products;
             } else {

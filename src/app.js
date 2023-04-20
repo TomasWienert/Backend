@@ -5,9 +5,9 @@ const manager = new ProductManager();
 
 const app = express();
 
-let productsResult = [];
+//let productsResult = [];
 
-const send = async () => {
+/* const send = async () => {
     const products = await manager.getProducts();
     console.log(products)
 
@@ -23,19 +23,34 @@ const send = async () => {
 
 }
 
-send();
+send(); */
 
-app.get("/products", (req, res) => {
+app.get("/products", async (req, res) => {
+
+    //traigo el query de cantidad de productos a mostrar, seria un "filtro"
     const {limit} = req.query;
     console.log(limit);
-    res.send(productsResult);
+
+    //traigo productos del json
+    const productsResult = await manager.getProducts();
+
+    //logica para enviar la cant de prods que me pide el cliente, si pide mas de los que hay muestra todo
+    limit ? res.send(productsResult.slice(0, limit)) : res.send(productsResult);
+    
 });
 
-app.get("/products/:pid", (req, res) => {
+app.get("/products/:pid", async (req, res) => {
+
+    //traigo id a mostrar
     const userId = Number(req.params.pid);
+
+    //traigo productos del json
+    const productsResult = await manager.getProducts();
+
+    //busco que producto tiene ese id que requiere el cliente
     const prod = productsResult.find(p => p.id === userId)
     res.send(prod);
 });
 
-app.listen(8080, )
+app.listen(8080, () => console.log("Listening on port 8080"));
 
