@@ -1,0 +1,68 @@
+[
+	{
+		"title": "plato",
+		"description": "hondo",
+		"price": 82,
+		"thumbnail": "ruta1",
+		"code": "abc124",
+		"stock": 55,
+		"category": "plato",
+		"status": true,
+		"id": 1
+	},
+	{
+		"title": "plato",
+		"description": "playo",
+		"price": 27,
+		"thumbnail": "ruta2",
+		"code": "ndg122",
+		"stock": 18,
+		"category": "plato",
+		"status": true,
+		"id": 2
+	},
+	{
+		"title": "bandeja",
+		"description": "Tsuji",
+		"price": 1127,
+		"thumbnail": "ruta2356",
+		"code": "bbb888",
+		"stock": 5,
+		"category": "bandeja",
+		"status": true,
+		"id": 3
+	},
+	{
+		"title": "taza",
+		"description": "chica",
+		"price": 33,
+		"thumbnail": "ruta4",
+		"code": "asf333",
+		"stock": 30,
+		"category": "plato",
+		"status": true,
+		"id": 4
+	},
+	{
+		"title": "plato",
+		"description": "postre",
+		"price": 74,
+		"thumbnail": "ruta5",
+		"code": "hgd282",
+		"stock": 49,
+		"category": "plato",
+		"status": true,
+		"id": 5
+	},
+	{
+		"title": "cafetera",
+		"description": "verbano",
+		"price": 87,
+		"thumbnail": "ruta23",
+		"code": "mka195",
+		"stock": 33,
+		"category": "plato",
+		"status": true,
+		"id": 6
+	}
+]

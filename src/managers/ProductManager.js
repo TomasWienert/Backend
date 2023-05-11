@@ -14,7 +14,6 @@ export default class ProductManager {
             
             if (fs.existsSync(path)) {
                 const data = await fs.promises.readFile(path, "utf-8");
-                //console.log(data);
                 const products = JSON.parse(data);
                 return products;
             } else {
@@ -27,34 +26,27 @@ export default class ProductManager {
         
     }
 
-    addProduct = async (title, description, price, thumbnail, code, stock) => {
+    addProduct = async (product) => {
 
         try {
 
             const products = await this.getProducts(); 
 
-            let product = {};
-
             // validación de que code no se repita
 
-            let checkCode = products.find((p) => p.code === code);
-            
+            let checkCode = products.find((p) => p.code === product.code);
+
             if (!checkCode) {
-                console.log("Se agrega el producto")
+                
 
-                // validación de que todos los campos estan completos
+                // validación de que todos los campos estan completos menos thumbnail
 
-                if (title && description && price && thumbnail && code && stock) {
-                    
-                    product = {
-                        title,
-                        description,
-                        price,
-                        thumbnail,
-                        code,
-                        stock
-                    }
+                if (product.title && product.description && product.price 
+                    && product.code && product.stock && product.category
+                    && product.status) {
 
+                    console.log("Se agrega el producto")
+                        
                     // Agrego producto con id autoincrementable
 
                     if (products.length === 0) {
@@ -63,6 +55,8 @@ export default class ProductManager {
                         // busco posicion (que es la longitud del array de productos-1) y luego le asigno el id anterior + 1
                         product.id = products[products.length - 1].id + 1; 
                     }
+
+                    //console.log(product);
             
                     products.push(product);
 
@@ -90,9 +84,9 @@ export default class ProductManager {
 
     // traer un producto por su id, si no esta ese id devolver "Not Found"
 
-    getProductById = (id) => {
+    getProductById = async (id) => {
 
-        const products = this.getProducts(); 
+        const products = await this.getProducts(); 
         
         let buscadorId = products.find((p) => p.id === id)
 
@@ -102,12 +96,3 @@ export default class ProductManager {
 
 
 }
-
-// PRUEBA
-
-/* const ManejadorProductos = new ProductManager();
-
-ManejadorProductos.addProduct("plato", "hondo", 82, "ruta1", 124, 55);
-ManejadorProductos.addProduct("plato", "playo", 27, "ruta2", 122, 18);
-ManejadorProductos.getProductById(2);
-console.log(ManejadorProductos.getProducts()); */
