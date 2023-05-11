@@ -94,13 +94,17 @@ router.post("/:cid/product/:pid", async (req, res) => {
                 product:productId,
                 quantity:q
             }
-            
-            //mando el objeto creado al arreglo del carrito en cuestion
-            console.log(newProd);
-            console.log(cart.products);            
 
-            //cart.products.push(newProd);
-            //console.log(cart.products);
+            //debo encontrar la posición del objeto a modificar dentro del arreglo de productos dentro del carrito
+
+            let productPos = cart.products.indexOf(prod);
+
+            //elimino esa posición del arreglo para luego pushear el objeto actualizado
+
+            cart.products.splice(productPos, 1);
+
+            cart.products.push(newProd);
+            
             res.send({status: "success", message:"product already in cart, quantity +1", newProd})
 
         };
@@ -108,7 +112,7 @@ router.post("/:cid/product/:pid", async (req, res) => {
         //luego envío a la posición del carrito que se encontró el nuevo producto o el anterior con q+1
 
         cartResult[cartId-1].products = cart.products;
-        console.log(cartResult)
+        //console.log(cartResult)
 
         //primero elimino archivo
 
