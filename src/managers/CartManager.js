@@ -1,6 +1,6 @@
 import fs from "fs";
 
-const path = "../files/Cart.json"
+const path = "./files/Cart.json"
 
 export default class CartManager {
 

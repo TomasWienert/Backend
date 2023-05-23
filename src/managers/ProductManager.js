@@ -1,6 +1,6 @@
 import fs from "fs";
 
-const path = "../files/Usuarios.json"
+const path = "./files/BaseProductos.json"
 
 export default class ProductManager {
 
@@ -93,6 +93,5 @@ export default class ProductManager {
         console.log(buscadorId);
 
     }
-
 
 }

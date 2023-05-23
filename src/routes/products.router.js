@@ -1,10 +1,11 @@
 import { Router } from "express";
 import fs from "fs";
 import ProductManager from "../managers/ProductManager.js";
+import { Console } from "console";
 
 const manager = new ProductManager();
 
-const path2 = "../files/BaseProductos.json";
+const path2 = "./files/BaseProductos.json";
 
 const router = Router();
 
@@ -22,6 +23,8 @@ router.get("/", async (req, res) => {
 
     //traigo productos del json
     const productsResult = await manager.getProducts();
+
+    console.log(productsResult);
 
     //logica para enviar la cant de prods que me pide el cliente, si pide mas de los que hay muestra todo
     limit ? res.send(productsResult.slice(0, limit)) : res.send(productsResult);

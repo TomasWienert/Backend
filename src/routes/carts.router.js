@@ -4,7 +4,7 @@ import CartManager from "../managers/CartManager.js";
 
 const manager = new CartManager();
 
-const path3 = "../files/Cart.json";
+const path3 = "./files/Cart.json";
 
 const router = Router();
 
