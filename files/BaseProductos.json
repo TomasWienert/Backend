@@ -24,10 +24,10 @@
 	{
 		"title": "bandeja",
 		"description": "Tsuji",
-		"price": 1127,
+		"price": 1108,
 		"thumbnail": "ruta2356",
 		"code": "bbb888",
-		"stock": 5,
+		"stock": 9,
 		"category": "bandeja",
 		"status": true,
 		"id": 3

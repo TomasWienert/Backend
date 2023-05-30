@@ -6,6 +6,9 @@ import viewsRouter from "./routes/views.router.js";
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
 
+// TRAIGO EL PRODUCT MANAGER PARA MOSTRAR EN EL FRONTEND LOS PRODUCTOS DE MI BASE
+import ProductManager from "../src/managers/ProductManager.js";
+
 const app = express();
 
 //PARAMETROS DE CONFIGURACION
@@ -20,7 +23,6 @@ app.engine("handlebars", handlebars.engine());
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "handlebars");
 
-app.use("/", viewsRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 
@@ -28,28 +30,23 @@ const server = app.listen(8080, () => console.log("Listening on port 8080"));
 
 const io = new Server(server);
 
-app.set("socketio", io);
+app.use("/", viewsRouter);
 
-//io.on("connection", socket => {
-    //console.log("nuevo cliente conectado")
+//USO MANAGER PARA MOSTRAR EN FRONTEND LOS PRODUCTOS DE LA BASE
 
-    //PARA RECIBIR EVENTOS DESDE EL LADO DEL CLIENTE HAGO LO SIGUIENTE (EVENTO MANDADO "MESSAGE")
-    /* socket.on("message", data => {
-        console.log(data);
-    }) */
+const manager = new ProductManager();
 
-    //PARA MANDAR MENSAJE DESDE EL SERVIDOR A UN SOLO CLIENTE
+io.on("connection", async socket => {
+    console.log("nuevo cliente conectado")
 
-    //socket.emit("evento_socket_individual", "mensajito que recibe el socket")
+    //TRAIGO EL ARREGLO DE OBJETOS CON TODOS MIS PRODUCTOS
 
-    //PARA MANDAR MENSAJE A TODOS LOS USUARIOS CONECTADOS AL SERVER MENOS AL QUE SE CONECTA
+    const productsResult = await manager.getProducts();
 
-    //socket.broadcast.emit("evento_todos_menos_actual", "mensaje para todos menos el actual")
+    //MANDO EL ARREGLO AL FRONT
 
-    //MENSAJE PARA TODOS LOS CLIENTES CONECTADOS
+    socket.emit("home", {productsResult});
 
-    //io.emit("evento_todos", "mensaje para todos los conectados")
-
-//});
+});
 
 
